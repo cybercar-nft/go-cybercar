@@ -109,6 +109,9 @@ func (n *Node) MintQuota(ctx context.Context, owner common.Address) (Quota, erro
 }
 
 func (n *Node) AddAirdrop(ctx context.Context, owners []common.Address, amount uint8) error {
+	for _, owner := range owners {
+		n.Sugar.Infof("AddAirdrop for %s", owner.String())
+	}
 	chainId, err := n.ec.ChainID(ctx)
 	if err != nil {
 		n.Sugar.Errorf("Get chainId error: %s", err)
